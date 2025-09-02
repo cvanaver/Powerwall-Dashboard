@@ -29,9 +29,10 @@ services:
         hostname: pypowerwall
         restart: unless-stopped
         volumes:
-            - type: bind
-              source: .auth
-              target: /app/.auth
+            - pypw_auth:/app/.auth
+            #- type: bind
+            #  source: .auth
+            #  target: /app/.auth
         user: "${PWD_USER:-1000:1000}"
         ports:
             - "${PYPOWERWALL_PORTS:-8675:8675}"
@@ -132,3 +133,5 @@ services:
             timeout: 10s
             retries: 3
             start_period: 60s
+volumes:
+  pypw_auth:
